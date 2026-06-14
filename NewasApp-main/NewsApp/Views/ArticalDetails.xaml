@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="NewsApp.ArticalDetails"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Artical"
+             Shell.TabBarIsVisible="False">
+    <ScrollView>
+        <StackLayout Padding="24" Spacing="20">
+
+            <!--  save and author  -->
+            <Grid Margin="0,10,0,0"
+                  Padding="0"
+                  ColumnDefinitions="*,Auto">
+                <!--  اسم الكاتب  -->
+                <Label x:Name="AuthorName"
+                       Grid.Column="0"
+                       FontSize="14"
+                       TextColor="Gray"
+                       VerticalOptions="Center" />
+
+                <!--  زر الحفظ  -->
+                <Button x:Name="saved"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Clicked="saved_Clicked"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="25"
+                        HorizontalOptions="End"
+                        IsVisible="False"
+                        Text="&#57807;"
+                        TextColor="Gold"
+                        VerticalOptions="Center" />
+                <Button x:Name="unsaved"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Clicked="unsaved_Clicked"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="25"
+                        HorizontalOptions="End"
+                        Text="&#57806;"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+            </Grid>
+
+
+
+
+
+            <Label x:Name="ArticleTitle"
+                   FontAttributes="Bold"
+                   FontFamily="Libre Baskerville"
+                   FontSize="20"
+                   HorizontalTextAlignment="Start"
+                   LineBreakMode="WordWrap"
+                   LineHeight="1.5"
+                   TextColor="#111827"
+                   VerticalTextAlignment="Start" />
+
+            <Frame Margin="0"
+                   Padding="0"
+                   BackgroundColor="Transparent"
+                   BorderColor="Transparent"
+                   CornerRadius="12"
+                   HasShadow="False"
+                   IsClippedToBounds="True">
+
+                <Image x:Name="ArticleImage"
+                       Aspect="AspectFit"
+                       BackgroundColor="{StaticResource White}"
+                       HorizontalOptions="FillAndExpand"
+                       MaximumHeightRequest="300"
+                       MinimumHeightRequest="150"
+                       VerticalOptions="Start" />
+            </Frame>
+
+
+            <Label x:Name="ArticleDetails"
+                   FontSize="16"
+                   HorizontalTextAlignment="Start"
+                   LineBreakMode="WordWrap"
+                   TextColor="Black" />
+
+            <Button Clicked="ReadMoreButton_Clicked" Text="Read More" />
+
+        </StackLayout>
+    </ScrollView>
+
+
+</ContentPage>
+
+

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="NewsApp.Views.SearchResult"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:NewsApp"
+    xmlns:models="clr-namespace:NewsAPI.Models;assembly=NewsAPI"
+    Shell.TabBarIsVisible="True">
+
+    <Grid>
+        <ScrollView VerticalScrollBarVisibility="Always">
+            <Grid Padding="30,0" RowDefinitions="auto,auto,auto,auto,*">
+                <VerticalStackLayout Grid.Row="4" Margin="0,20,0,0">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Latest" />
+                    <CollectionView
+                        x:Name="SearchResultList"
+                        Margin="20"
+                        SelectionMode="Single">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Article">
+                                <Grid Margin="0,0,0,0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            CommandParameter="{Binding .}"
+                                            NumberOfTapsRequired="1"
+                                            Tapped="TapGestureRecognizer_Tapped" />
+                                    </Grid.GestureRecognizers>
+                                    <Border
+                                        Margin="0,0,0,20"
+                                        Padding="15"
+                                        BackgroundColor="#f0f0f0"
+                                        StrokeShape="RoundRectangle 22">
+                                        <VerticalStackLayout Spacing="10">
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="20"
+                                                Text="{Binding Title}"
+                                                TextColor="#111827" />
+
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding PublishedAt, StringFormat='Published: {0:yyyy-MM-dd hh:mm tt}'}"
+                                                TextColor="Gray" />
+
+                                            <Grid ColumnDefinitions="auto,*" ColumnSpacing="15">
+
+                                                <Image
+                                                    Grid.Column="0"
+                                                    Margin="0,8,0,0"
+                                                    Aspect="AspectFill"
+                                                    HorizontalOptions="Start"
+                                                    MaximumWidthRequest="180"
+                                                    Source="{Binding UrlToImage}"
+                                                    VerticalOptions="Start" />
+
+
+                                            </Grid>
+                                            <Label Text="{Binding Url}" />
+
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </Grid>
+        </ScrollView>
+        <Grid
+            x:Name="isLoading"
+            BackgroundColor="Black"
+            Opacity=".5">
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                HorizontalOptions="Center"
+                IsRunning="True"
+                VerticalOptions="Center"
+                Color="{StaticResource Secondary}" />
+        </Grid>
+    </Grid>
+</ContentPage>

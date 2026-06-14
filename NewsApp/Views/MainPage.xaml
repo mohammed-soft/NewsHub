@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="NewsApp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:NewsApp"
+    xmlns:models="clr-namespace:NewsAPI.Models;assembly=NewsAPI"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <x:Array x:Key="CategoriesArray" Type="{x:Type x:String}">
+            <x:String>All</x:String>
+            <x:String>Business</x:String>
+            <x:String>Entertainment</x:String>
+            <x:String>Health</x:String>
+            <x:String>Sports</x:String>
+            <x:String>Science</x:String>
+            <x:String>Technology</x:String>
+
+        </x:Array>
+    </ContentPage.Resources>
+    <Grid>
+        <ScrollView VerticalScrollBarVisibility="Always">
+            <Grid Padding="30,0" RowDefinitions="auto,auto,auto,auto,*">
+
+                <VerticalStackLayout Grid.Row="0" HorizontalOptions="Start">
+                    <Label
+                        Style="{StaticResource Headline}"
+                        Text="NewsHub"
+                        TextColor="{StaticResource Primary}" />
+
+                    <Label x:Name="Date" Style="{StaticResource SubHeadline}" />
+
+                </VerticalStackLayout>
+                <Border
+                    Grid.Row="1"
+                    Margin="0,10"
+                    Padding="2"
+                    Background="#F9FAFB"
+                    StrokeShape="RoundRectangle 22">
+                    <Grid ColumnDefinitions="*,auto" HorizontalOptions="Fill">
+                        <Entry
+                            x:Name="searchEntry"
+                            BackgroundColor="Transparent"
+                            Placeholder="Search" />
+
+                        <Border
+                            Grid.Column="1"
+                            Margin="10,10"
+                            Background="Transparent"
+                            HorizontalOptions="End"
+                            StrokeShape="RoundRectangle 50"
+                            WidthRequest="100">
+                            <Button
+                                x:Name="searchBtn"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                Clicked="Search_Clicked"
+                                Text="Search"
+                                TextColor="{StaticResource Primary}"
+                                WidthRequest="50" />
+
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <CollectionView
+                    Grid.Row="2"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsLayout="HorizontalList"
+                    ItemsSource="{StaticResource CategoriesArray}"
+                    SelectionChanged="Category_SelectionChanged"
+                    SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout>
+                                <Border
+                                    Padding="20,8"
+                                    Background="#F9FAFB"
+                                    StrokeShape="RoundRectangle 22">
+                                    <Label Text="{Binding}" />
+                                </Border>
+                                <BoxView Background="Transparent" WidthRequest="8" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <VerticalStackLayout Grid.Row="3" Margin="0,20,0,0">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Tranding" />
+                    <CarouselView
+                        x:Name="Trending"
+                        Margin="0"
+                        EmptyView="No article found!"
+                        HeightRequest="450"
+                        IsBounceEnabled="False"
+                        IsVisible="True"
+                        ItemsSource="{Binding Articles}"
+                        Loop="True">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Article">
+                                <Grid
+                                    Padding="16"
+                                    BackgroundColor="White"
+                                    RowDefinitions="Auto,*"
+                                    VerticalOptions="End">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            CommandParameter="{Binding .}"
+                                            NumberOfTapsRequired="1"
+                                            Tapped="TapGestureRecognizer_Tapped" />
+                                    </Grid.GestureRecognizers>
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        CornerRadius="12"
+                                        HasShadow="False"
+                                        IsClippedToBounds="True">
+
+                                        <Image
+                                            Aspect="AspectFit"
+                                            BackgroundColor="{StaticResource White}"
+                                            HorizontalOptions="FillAndExpand"
+                                            MaximumHeightRequest="300"
+                                            MinimumHeightRequest="150"
+                                            Source="{Binding UrlToImage}"
+                                            VerticalOptions="Start" />
+                                    </Frame>
+
+
+                                    <VerticalStackLayout
+                                        Grid.Row="1"
+                                        Margin="0,8,0,0"
+                                        VerticalOptions="End">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="20"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding Title}"
+                                            TextColor="#111827"
+                                            VerticalOptions="End" />
+
+                                        <Label
+                                            FontAttributes="Italic"
+                                            FontSize="14"
+                                            Text="{Binding PublishedAt, StringFormat='Published on {0:MMMM dd, yyyy – hh:mm tt}'}"
+                                            TextColor="#6B7280"
+                                            VerticalOptions="End" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="4" Margin="0,20,0,0">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Latest" />
+                    <CollectionView
+                        x:Name="LatestNews"
+                        Margin="20"
+                        RemainingItemsThreshold="1"
+                        RemainingItemsThresholdReached="LatestNews_RemainingItemsThresholdReached"
+                        SelectionMode="Single">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Article">
+                                <Grid Margin="0,0,0,0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            CommandParameter="{Binding .}"
+                                            NumberOfTapsRequired="1"
+                                            Tapped="TapGestureRecognizer_Tapped" />
+                                    </Grid.GestureRecognizers>
+                                    <Border
+                                        Margin="0,0,0,20"
+                                        Padding="15"
+                                        BackgroundColor="#f0f0f0"
+                                        StrokeShape="RoundRectangle 22">
+                                        <VerticalStackLayout Spacing="10">
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="20"
+                                                Text="{Binding Title}"
+                                                TextColor="#111827" />
+
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding PublishedAt, StringFormat='Published: {0:yyyy-MM-dd hh:mm tt}'}"
+                                                TextColor="Gray" />
+
+                                            <Grid ColumnDefinitions="auto,*" ColumnSpacing="15">
+
+                                                <Image
+                                                    Grid.Column="0"
+                                                    Margin="0,8,0,0"
+                                                    Aspect="AspectFill"
+                                                    HorizontalOptions="Start"
+                                                    MaximumWidthRequest="180"
+                                                    Source="{Binding UrlToImage}"
+                                                    VerticalOptions="Start" />
+
+
+                                            </Grid>
+                                            <Label Text="{Binding Url}" />
+
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button
+                        x:Name="loadMoreBtn"
+                        Margin="0,0,0,10"
+                        Clicked="LatestNews_RemainingItemsThresholdReached"
+                        HorizontalOptions="Center"
+                        Text="Load more .." />
+                </VerticalStackLayout>
+
+            </Grid>
+        </ScrollView>
+        <Grid
+            x:Name="isLoading"
+            BackgroundColor="Black"
+            Opacity=".5">
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                HorizontalOptions="Center"
+                IsRunning="True"
+                VerticalOptions="Center"
+                Color="{StaticResource Secondary}" />
+        </Grid>
+    </Grid>
+</ContentPage>

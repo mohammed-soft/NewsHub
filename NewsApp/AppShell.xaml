@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="NewsApp.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:NewsApp"
+       xmlns:views="clr-namespace:NewsApp.Views"
+       Title="NewsApp"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.TabBarIsVisible="True">
+
+    <TabBar Route="root">
+        <Tab Title="Home" Route="MainPage">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+        <Tab Title="Explore" Route="Explore">
+            <ShellContent ContentTemplate="{DataTemplate views:Explore}" />
+        </Tab>
+        <Tab Title="List" Route="List">
+            <ShellContent ContentTemplate="{DataTemplate views:List}" />
+        </Tab>
+        <Tab Title="Profile" Route="Profile">
+            <ShellContent ContentTemplate="{DataTemplate views:Profile}" />
+        </Tab>
+        
+
+
+
+    </TabBar>
+
+
+
+</Shell>

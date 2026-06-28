@@ -372,4 +372,7 @@ FodyWeavers.xsd
 appsettings.json
 appsettings.*.json
 !appsettings.example.json
-!appsettings.Development.json
+
+# Gemini / AI agent files
+.gemini/
+.agents/

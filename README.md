@@ -18,7 +18,6 @@ A modern cross-platform news application built with .NET MAUI, providing users w
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -205,10 +204,6 @@ NewsHub/
 ## Contributing
 
 Contributions are welcome and appreciated. Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines on how to contribute to this project.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
 ## Support
 

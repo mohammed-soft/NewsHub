@@ -185,8 +185,6 @@ NewsHub/
 │   └── appsettings.Development.json
 ├── .gitignore
 ├── .env.example            # Environment variables template
-├── CONTRIBUTING.md         # Contribution guidelines
-├── LICENSE                 # MIT License
 └── README.md
 ```
 

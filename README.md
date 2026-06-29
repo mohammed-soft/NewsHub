@@ -17,7 +17,6 @@ A modern cross-platform news application built with .NET MAUI, providing users w
 - [Running](#running)
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
 
 ## Features
 
@@ -200,10 +199,6 @@ NewsHub/
 - **NewsAPI**: News content aggregation service
 - **CommunityToolkit.Maui**: UI component library
 - **XAML**: User interface markup language
-
-## Contributing
-
-Contributions are welcome and appreciated. Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines on how to contribute to this project.
 
 ## Support
 
